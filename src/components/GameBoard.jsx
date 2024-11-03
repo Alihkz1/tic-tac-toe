@@ -6,7 +6,7 @@ const initialValue = [
   [null, null, null],
 ];
 
-export default function GameBoard() {
+export default function GameBoard({ handleCellClick, activePlayerSymbol }) {
   const [boardState, setBoardState] = useState(initialValue);
   function cell_onClick(rowIndex, colIndex) {
     setBoardState((boardState) => {
@@ -14,9 +14,10 @@ export default function GameBoard() {
       /* create copy -> update a part */
       /* in code below even nested arrays are updated in memory */
       const updatedBoard = [...boardState.map((innerArray) => [...innerArray])];
-      updatedBoard[rowIndex][colIndex] = "X";
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
       return updatedBoard;
     });
+    handleCellClick();
   }
   return (
     <ol id="game-board">
