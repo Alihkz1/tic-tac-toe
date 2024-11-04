@@ -6,11 +6,9 @@ const initialValue = [
 
 export default function GameBoard({ handleCellClick, turns }) {
   let gameBoard = initialValue;
-
   for (const turn of turns) {
     const { square, player } = turn;
     const { rowIndex, colIndex } = square;
-
     gameBoard[rowIndex][colIndex] = player;
   }
 
@@ -34,7 +32,10 @@ export default function GameBoard({ handleCellClick, turns }) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => handleCellClick(rowIndex, colIndex)}>
+                <button
+                  onClick={() => handleCellClick(rowIndex, colIndex)}
+                  disabled={playerSymbol}
+                >
                   {playerSymbol}
                 </button>
               </li>
