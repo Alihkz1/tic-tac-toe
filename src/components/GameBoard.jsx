@@ -1,17 +1,4 @@
-const initialValue = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export default function GameBoard({ handleCellClick, turns }) {
-  let gameBoard = initialValue;
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { rowIndex, colIndex } = square;
-    gameBoard[rowIndex][colIndex] = player;
-  }
-
+export default function GameBoard({ handleCellClick, board }) {
   // const [boardState, setBoardState] = useState(initialValue);
   // function cell_onClick(rowIndex, colIndex) {
   //   setBoardState((boardState) => {
@@ -27,7 +14,7 @@ export default function GameBoard({ handleCellClick, turns }) {
 
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (

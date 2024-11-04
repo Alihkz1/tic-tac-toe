@@ -2,6 +2,13 @@ import Player from "./components/player";
 import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
 import { useState } from "react";
+import { WINNING_COMBINATIONS } from "./assets/winning-combinations";
+
+const initialValue = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
 
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = "X";
@@ -12,6 +19,18 @@ function deriveActivePlayer(gameTurns) {
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
+
+  let gameBoard = initialValue;
+  for (const turn of turns) {
+    const { square, player } = turn;
+    const { rowIndex, colIndex } = square;
+    gameBoard[rowIndex][colIndex] = player;
+  }
+
+  // for (const combination of WINNING_COMBINATIONS) {
+  //   const
+  // }
+
   function handleCellClick(rowIndex, colIndex) {
     setGameTurns((prevTurns) => {
       const activePlayer = deriveActivePlayer(prevTurns);
@@ -32,7 +51,7 @@ function App() {
         <GameBoard
           handleCellClick={handleCellClick}
           activePlayerSymbol={activePlayer}
-          turns={gameTurns}
+          board={gameBoard}
         />
       </div>
       <Log turns={gameTurns} />
