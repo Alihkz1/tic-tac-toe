@@ -85,6 +85,7 @@ function App() {
       return updatedTurns;
     });
   }
+
   return (
     <>
       <div id="game-container">
